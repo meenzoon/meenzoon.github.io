@@ -1,0 +1,186 @@
+html,
+body {
+    background-color: #fefefe;
+}
+
+/*
+    Header안에 logo와 nav의 자식 요소가 있다. 이 둘의 position은 absolute이다.
+    absolute는 해당 요소를 감싸고 있는 position이 static(기본 값)이 아닌 요소를 기준으로 위치를 정하게 된다. 
+    
+    만약 Header의 position이 static이라면 안에 있는 logo와 nav는 Header의 부모 요소를 검사하게 되고 static이 아닐 때까지 찾게 된다. 
+    
+    Header를 기준으로 logo와 nav를 위치시키기 위해 Header의 position을 absolute, relative, fixed 중 하나로 변경해야하는데 Header는 화면 상단에 고정되어 있으므로 이를 
+    fixed로 변경하였다. 
+    
+    fixed가 되면 해당 요소의 width는 사라지므로 아래 처럼 width:100%를 적어준다.
+*/
+.header {
+    height: 60px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+/*
+    logo는 Header 왼쪽에 위치해주기 위해 position을 absolute로 하였고
+    left:0 및 top: 0을 추가하였다.
+    left: 0과 top: 0의 의미는 왼쪽으로 0만큼 위에서 부터 0만큼에 위치하라 이다.
+*/
+.logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0 16px;
+    line-height: 60px;
+    height: 60px;
+}
+
+/*
+    nav를 Header를 기준으로 오른쪽에 맞추기 위해 position을 absolute로 하였고 
+    right: 0, top: 0을 추가하였다. 
+*/
+.nav {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/*
+    li 요소는 block요소 이기 때문에 요소마다 새로운 행에서 시작된다.
+    같은 행에 위치하기 위해 display를 inline-block 또는 float으로 처리할 수 있지만
+    여기서는 inline-block으로 하였다.
+    
+    line-height: 60px는 글자를 가운데 정렬하기 위함이다. 
+*/
+.nav > li {
+    display: inline-block;
+    padding: 0 16px;
+    line-height: 60px;
+}
+
+/*
+    a 태그 밑줄 제거 및 텍스트 색상 변경
+*/
+.nav > li > a {
+    color: darkslategrey;
+    text-decoration: none;
+}
+
+/*
+    checkbox를 안보이게 하기 위해 visibility: hidden을 사용한다.
+*/
+#nav-toggle {
+    visibility: hidden;
+}
+
+/* 메뉴버튼은 모바일에서만 보이게 한다. */
+.navicon {
+    display: none;
+}
+
+/*
+    미디어 쿼리를 통해 화면의 크기마다 CSS를 다르게 적용할 수 있다.
+    아래는 화면의 크기가 0~980px 일 때 { }안에 있는 CSS가 적용된다.
+
+    @media screen and (min-width:0px) and (max-width:980px)과 같이 처리 할 수 도 있지만 보통 아래처럼 사용한다.
+*/
+@media screen and (max-width:980px) {
+    .header {
+        height: 120px;
+    }
+
+    /*
+        logo의 포지션을 absolute에서 static으로 변경하여 width가 다시 100%가 되게하고
+        text-align속성을 통해 텍스트를 가운데 정렬 시킨다.
+    */
+    .logo {
+        position: static;
+        text-align: center;
+    }
+
+    /*
+        nav의 포지션을 absolute에서 static으로 변경하여 width가 다시 100%가 되게하고
+        text-align속성을 통해 li들을 가운데 정렬 시킨다.
+        
+        li는 기본적으로 block 요소이기 때문에 text-align을 할 수 없지만
+        위에서 li의 display를 inline-block으로 변경하였기 때문에 지금 li는 인라인 속성도 가지고 있기에 text-align을 사용할 수 있다.
+    */
+    .nav {
+        position: static;
+        text-align: center;
+    }
+}
+
+/*
+    아래는 화면의 크기가 0~780px 일 때 { }안에 있는 CSS가 적용된다.
+    
+    CSS는 위에서 아래로 해석된다 
+    만약 기본 CSS 또는 @media screen and (max-width:980px) 안에 있는 
+    CSS가 적용되더라도 화면의 너비가 780보다 작다면 최종적으로 아래에 있는
+    CSS가 적용된다.
+*/
+@media screen and (max-width:780px) {
+
+    .header {
+        height: 60px;
+    }
+
+    /* 
+        logo를 다시 왼쪽으로 보내야하기 때문에
+        position을 다시 absolute로 변경하였다.
+        
+    */
+    .logo {
+        position: absolute;
+    }
+
+    /*
+        nav를 메뉴를 선택하기 전까지 보이지 않게 하기 위해서
+        display를 none으로 하여 안보이게 한다.
+    */
+    .nav {
+        display: none;
+    }
+
+    /*
+        메뉴 버튼을 오른쪽 끝으로 보낸다.
+        navicon의 display가 none 이므로 block으로 변경시켜 화면에 보이게 한다.
+    */
+    .navicon {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0 16px;
+        line-height: 60px;
+    }
+
+    /*
+        checkbox의 상태가 checked일 경우 nav를 보이게 만들어야 한다.
+        우선 nav의 display를 none에서 block으로 변경한다.
+        
+        상단에 빈공간이 생기는데 이부분은 checkbox 때문에 생기는 부분이다.
+    
+        header의 아래에 표시하기 위해 position을 fixed로 변경하고 
+        width:100%를 추가하고 top을 60px을 준다.
+    */
+    #nav-toggle:checked ~ .nav {
+        display: block;
+        
+        position: fixed;
+        width: 100%;
+        top: 60px;
+    }
+    /*
+        li요소들이 지금 inline-block이기 때문에 옆으로 보여질 것 이다.
+        display를 block으로 변경하고
+        배경색을 변경한다.
+    */
+    #nav-toggle:checked ~ .nav > li {
+        display: block;
+        background-color: cadetblue;
+    }
+}

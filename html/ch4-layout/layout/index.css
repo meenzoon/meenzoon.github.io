@@ -1,0 +1,71 @@
+/* 
+    Header가 상단에 fixed로 고정되어 있기 때문에 Container 내에 
+    안보이는 부분이 생길 수 있다. 이를 해결하기 위해 padding-top을 header 크기 만큼 준다.
+
+*/
+.container {
+    padding-top: 60px;
+    /*
+        container의 너비를 최대 1200px까지 허용한다.
+    */
+    max-width: 1200px;
+    /*
+        max-width가 넘어갈 때 가운데에 배치하기 위해 margin: 0 auto;를 사용한다.
+    */
+    margin:0 auto;
+    
+    min-height: 100%;
+}
+
+/*
+    float을 사용하면 해당 요소들이 화면상에서 부유(둥둥떠다니는?)하게 된다.
+    그렇기 때문에 이다음에 나타나는 요소들이 화면상에서 이상하게 표시되는데 
+    이를 방지하기 위해 clear:both을 사용하는데 다음과 같이 가상 요소를 사용해서
+    해결한다.
+*/
+.container::after{
+    content:'';
+    display: block;
+    clear: both;
+}
+
+/*
+    aside와 section을 옆으로 배치하기 위해 float을 left로 주었다.
+*/
+.aside {
+    width: 30%;
+    height: 300px;
+    background-color: crimson;
+    
+    float:left;
+    
+    color: white;
+    font-size: 2rem;
+}
+
+.section {
+    width: 70%;
+    height: 350px;
+    float:left;
+    background-color: lightblue;
+    color: white;
+    font-size: 2rem;
+}
+
+/*
+    container의 내용이 적을 경우 footer가 화면에 보이게 된다. 근데 다음 처럼 footer의 배경색이 존재할 경우 다음 처럼 디자인 상 예쁘지 않은 형태가 된다. 
+
+    그래서 container의 내용이 적을 때는 하단에 배치할 수 있도록 약간의 트릭을 사용한다.
+    container의 min-height을 100%로 설정한다(height이 아닌 min-height을 100%으로 해야 container가 내용이 늘어 날 때 footer가 하단에 배치될 수 있다)
+    
+    그리고 container의 padding-bottom을 footer의 높이인 200px 만큼주고
+    footer의 margin-top을 -200px를 하게 되면된다.
+
+*/
+.footer {
+    background-color: darkgreen;
+    height: 200px;
+    margin-top: -200px;
+    color: white;
+    font-size: 2rem;
+}
