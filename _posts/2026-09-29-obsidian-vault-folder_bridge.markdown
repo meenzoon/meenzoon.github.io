@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 > ✨ **Crafted with Claude Opus 5.5**
 >
 > *Born from a real-world frustration, shaped together with AI.*
