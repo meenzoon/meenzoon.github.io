@@ -8,7 +8,10 @@ source "https://rubygems.org"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 3.8.5"
+gem "jekyll", "~> 3.10"
+
+# Jekyll 3.9+ uses kramdown 2.x, which needs this separate GFM parser
+gem "kramdown-parser-gfm"
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 gem "minima", "~> 2.0"
